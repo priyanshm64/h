@@ -371,3 +371,45 @@ return 0;
 }
 
 
+binary
+
+
+#include<iostream>
+#include<fstream>
+using namespace std;
+int main()
+{
+    int h,m,s;
+    char ch= ':';
+    ofstream fp ("time1.bin",ios::binary);
+    if (fp){
+        cout <<"enter time in hms /n";
+        cin>>h>>m>>s;
+        fp.write((char*)&h,sizeof(h));
+        fp.write((char*)&ch,sizeof(ch));
+        fp.write((char*)&m,sizeof(m));
+        fp.write((char*)&ch,sizeof(ch));
+        fp.write((char*)&s,sizeof(s));
+    }
+    else{
+        cout<< ("unable to open the files");
+    }
+    fp.close();
+    int h1,m1,s1;
+    char ch1;
+    ifstream fp1("time1.bin",ios::binary);
+    fp1.read((char*)&h1,sizeof(h1));
+    fp1.read((char*)&ch1,sizeof(ch1));
+    fp1.read((char*)&m1,sizeof(m1));
+    fp1.read((char*)&ch1,sizeof(ch1));
+    fp1.read((char*)&s1,sizeof(s1));
+
+    cout<< "time: ";
+    cout<<h1<<ch1<<m1<<ch1<<s1;
+    fp1.close();
+
+
+    
+    return 0;
+}
+
